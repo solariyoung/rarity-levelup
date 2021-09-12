@@ -18,7 +18,7 @@ const getAdventureLog = async (id) => {
 }
 
 // sends your summoner on an adventure!
-const adventure = async (summonerId, currentTime) => {
+const adventure = async (summonerId, currentTime,gap = 0) => {
     let adventureTimestamp = await getAdventureLog(summonerId)
     if (currentTime.gt(adventureTimestamp)) {
         try {
@@ -29,6 +29,9 @@ const adventure = async (summonerId, currentTime) => {
             pause()
         } catch (err) {
             error('adventure', summonerId, `Could not send the tx: ${err}`)
+            if (gap-- >0){
+                await adventure(summonerId,currentTime,gap);
+            }
         }
     } else {
         log('adventure', summonerId, `Not yet time to adventure.`)
