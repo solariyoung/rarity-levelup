@@ -17,7 +17,7 @@ const main = async () => {
         console.log(
             `### Start with summoner ${summonerIds[i]} ${summonerClass} ###`
         )
-        await adventure.adventure(summonerIds[i], currentTime)
+        await adventure.adventure(summonerIds[i], currentTime,3)
         await levelUp(summonerIds[i])
         await craftAdventure.craftAdventure(summonerIds[i], currentTime)
         await spendBaseAttributes(summonerIds[i])
