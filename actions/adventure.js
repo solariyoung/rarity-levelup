@@ -38,7 +38,7 @@ const adventure = async (summonerId, currentTime,gap = 0) => {
     }
 }
 
-module.exports = { adventure }
+module.exports = adventure
 
 // adventure().catch((err) => {
 //   console.error(err);

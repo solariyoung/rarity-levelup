@@ -21,7 +21,9 @@ const { checkLevel } = require('./levelUp')
 const claimGold = async (summonerId) => {
     let level = await checkLevel(summonerId)
     let amount = await claimable(summonerId)
-    if (level.gt(1) && amount.isBigNumber() && amount.gt(0)) {
+    if (amount === undefined ) {
+        log('gold', summonerId, `No gold to claim or already claimed for level ${level}`)
+    } else if (level.gt(1) && amount.gt(0)) {
         try {
             let response = await writeContract.claim(summonerId)
             /* let receipt = */ await response.wait()
@@ -36,9 +38,8 @@ const claimGold = async (summonerId) => {
     }
 }
 
-module.exports = {
-    claimGold,
-}
+module.exports = claimGold
+
 
 // claim(163414).catch((err) => {
 //     console.error(err)
