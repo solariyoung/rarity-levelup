@@ -3,8 +3,15 @@ const ethers = require('ethers')
 const { provider, wallet } = require('../config/wallet')
 
 const getGasPrice = async () => {
-    let gasPrice = await provider.getGasPrice()
-    console.log(ethers.utils.formatUnits(gasPrice, 'gwei'))
+    try{
+        
+        let gasPrice = await provider.getGasPrice()
+        console.log(ethers.utils.formatUnits(gasPrice, 'gwei'))
+    }catch(err){
+        error('gas','Could not get gas price,use default instead!')
+        console.log(ethers.utils.formatUnits(150, 'gwei'))
+        
+    }
 }
 
 const getNonce = async () => {
